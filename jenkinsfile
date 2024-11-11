@@ -40,13 +40,11 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                script {
-                    // Ejemplo de despliegue
-                    docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").run("""
-                        -v ${WORKSPACE}/output:/app/output \
-                        -v ${WORKSPACE}/plantillas:/app/plantillas
-                    """)
-                }
+                // Desplegar el contenedor en local
+                docker run -d \
+                    -v ${WORKSPACE}/output:/app/output \
+                    -v ${WORKSPACE}/plantillas:/app/plantillas \
+                    ${DOCKER_IMAGE}:${DOCKER_TAG}
             }
         }
     }
