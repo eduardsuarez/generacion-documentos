@@ -16,7 +16,7 @@ def reemplazar_docx(ruta_documento, datos):
         for run in paragraph.runs:
             for key, value in datos.items():
                 if f"${{{key}}}" in run.text:
-                    run.text = run.text.replace(f"${{{key}}}", value)
+                    run.text = run.text.replace(f"{{{key}}}", value)
     ruta_salida = f"temp_{uuid.uuid4()}.docx"
     ruta_salida_tmp = os.path.join(ruta_actual,"tmp",ruta_salida)
     documento.save(ruta_salida_tmp)

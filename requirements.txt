@@ -1,0 +1,7 @@
+openpyxl
+python-docx
+pandas
+pypdf2
+docxtpl
+xlsxwriter
+python-dotenv
