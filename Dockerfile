@@ -8,11 +8,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     mypy \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+WORKDIR /generacion-documentos
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-RUN mkdir -p /app/tmp /app/output
+RUN mkdir -p /generacion-documentos/tmp
 #Usuario no root por seguridad
 RUN useradd -m esuarez
 USER esuarez

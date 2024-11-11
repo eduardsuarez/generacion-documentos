@@ -43,8 +43,6 @@ pipeline {
                 // Desplegar el contenedor en local
                 sh '''
                     docker run -d \
-                        -v ${WORKSPACE}/output:/app/output \
-                        -v ${WORKSPACE}/plantillas:/app/plantillas \
                         ${DOCKER_IMAGE}:${DOCKER_TAG}
                 '''
             }
