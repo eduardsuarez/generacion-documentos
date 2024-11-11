@@ -29,8 +29,6 @@ pipeline {
             steps {
                 script {
                     docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
-                        // instalar herramientas necesarias
-                        sh 'pip install flake8 black mypy'
                         // Análisis estático
                         sh 'flake8 src/'
                         sh 'black --check src/'
