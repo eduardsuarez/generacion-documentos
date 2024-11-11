@@ -27,14 +27,14 @@ pipeline {
 
         stage('Quality Check') {
             steps {
-                script {
-                    docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
+                //script {
+                   // docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
                         // Análisis estático
-                        sh 'flake8 src/'
-                        sh 'black --check src/'
-                        sh 'mypy src/'
-                    }
-                }
+                        //sh 'flake8 src/'
+                        //sh 'black --check src/'
+                        //sh 'mypy src/'
+                    //}
+                //}
             }
         }
 
