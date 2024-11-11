@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'generador-documentos'
+        DOCKER_TAG = 'latest'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Obtener código de GitHub
+                git branch: 'main',
+                    url: 'https://github.com/eduardsuarez/generacion-documentos.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Construir imagen Docker
+                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                }
+            }
+        }
+
+
+        stage('Quality Check') {
+            steps {
+                script {
+                    docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
+                        // Análisis estático
+                        sh 'flake8 src/'
+                        sh 'black --check src/'
+                        sh 'mypy src/'
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Ejemplo de despliegue
+                    docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").run("""
+                        -v ${WORKSPACE}/output:/app/output \
+                        -v ${WORKSPACE}/plantillas:/app/plantillas
+                    """)
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Limpiar workspace
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline ejecutado exitosamente!'
+        }
+        failure {
+            echo 'Pipeline falló'
+        }
+    }
+}
