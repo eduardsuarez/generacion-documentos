@@ -44,6 +44,7 @@ pipeline {
                 docker.withRegistry('https://index.docker.io/v1/') {
                     image = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                     container = docker.run('-d', '-p', '4449:4449', '-v', "${WORKSPACE}/tmp:/generacion-documentos/tmp", image)
+                }
             }
         }
     }
