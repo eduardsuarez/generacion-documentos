@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcairo2-dev gcc  g++ \ 
     libffi-dev libfreetype-dev libreoffice-writer \
     libreoffice-calc libreoffice-base libreoffice-common \
-    openjdk-11-jre-headless \
+    default-jre \
     "fonts-dejavu" fonts-freefont-ttf coreutils  curl \
     libjpeg62-turbo-dev zlib1g-dev
     
