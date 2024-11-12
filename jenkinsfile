@@ -41,11 +41,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Desplegar el contenedor en local
-                sh '''
-                    docker run -d \
-                    -v ${WORKSPACE}/tmp:/generacion-documentos/tmp \
-                        ${DOCKER_IMAGE}:${DOCKER_TAG}
-                '''
+                script {
+                docker.run("-d -p 4449:4449 ${DOCKER_IMAGE}:${DOCKER_TAG}").trim()
+                }
             }
         }
     }

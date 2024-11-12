@@ -16,4 +16,5 @@ RUN mkdir -p /generacion-documentos/tmp
 #Usuario no root por seguridad
 RUN useradd -m esuarez
 USER esuarez
-CMD [ "python", "src/generar_documentos.py"]
+EXPOSE 4449
+CMD [ "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "4449"]
