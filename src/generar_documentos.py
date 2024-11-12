@@ -56,4 +56,5 @@ if __name__ == "__main__":
         "METRICA_RENDIMIENTO": "ROI",
         "NOMBRE_PLATAFORMA": "TELCO-BIT"
     }
-    reemplazar_docx(ruta_plantilla,datos)
+    #reemplazar_docx(ruta_plantilla,datos)
+    print("Se crea el contenedor")
