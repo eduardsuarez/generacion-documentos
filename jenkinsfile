@@ -41,6 +41,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Desplegar el contenedor en local
+                sh 'docker rm -f $(docker ps -a -q --filter name=generador-documentos)'
                 sh '''
                     docker run -d \
                     -v ${WORKSPACE}/tmp:/generacion-documentos/tmp \
@@ -54,7 +55,6 @@ pipeline {
         always {
             // Limpiar workspace
             cleanWs()
-            sh 'docker rm -f $(docker ps -aq)'
         }
         success {
             echo 'Pipeline ejecutado exitosamente!'
