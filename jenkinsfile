@@ -41,15 +41,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/') {
-                        // Your code using the docker object goes here
-                        image = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
-                        container = docker.run(
-                            '-d',  // Detached mode
-                            '-p', '4449:4449',  // Port mapping
-                            '-v', "${WORKSPACE}/tmp:/generacion-documentos/tmp",  // Volume mount
-                            image
-                        )
+                    / Usar docker.image().inside() para ejecutar el contenedor
+                    docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside("-d -p 4449:4449 -v ${WORKSPACE}/tmp:/generacion-documentos/tmp") {
+                        // Aquí puedes ejecutar comandos dentro del contenedor
+                        echo 'Contenedor ejecutado con éxito.'
                     }
                 }
             }
