@@ -52,6 +52,8 @@ pipeline {
 
                 // Desplegar el nuevo contenedor
                 sh '''
+                    mkdir -p ${WORKSPACE}/tmp
+                    chmod -R 777 ${WORKSPACE}/tmp
                     docker run -d -p 4449:4449 \
                     -v ${WORKSPACE}/tmp:/generacion-documentos/tmp \
                     ${DOCKER_IMAGE}:${DOCKER_TAG}
