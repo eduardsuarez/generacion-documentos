@@ -21,7 +21,7 @@ RUN useradd -ms /bin/bash esuarez
 
 RUN mkdir -p /generacion-documentos/tmp && \
     chmod -R 777 /generacion-documentos && \
-    chown -R esuarez:esuarez /generacion-documentos/tmp
+    chown -R esuarez:esuarez /generacion-documentos
 
 USER esuarez
 
