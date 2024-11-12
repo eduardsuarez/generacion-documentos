@@ -15,9 +15,10 @@ async def home():
 
 #Remmplazar valores en plantilla .docx
 @app.post("/replaceDocx/")
-async def reemplazar_docx(ruta_documento, datos):
+async def reemplazar_docx():
     try:
         # Reemplazar valores en la plantilla
+        print("Entró en /replaceDocx")
         ruta_actual = os.getcwd()
         ruta_plantilla = os.path.join(ruta_actual,"plantillas","formato-documento.docx")
         datos = {
@@ -26,7 +27,7 @@ async def reemplazar_docx(ruta_documento, datos):
             "METRICA_RENDIMIENTO": "ROI",
             "NOMBRE_PLATAFORMA": "TELCO-BIT"
         }
-        documento = docx.Document(ruta_documento)
+        documento = docx.Document(ruta_plantilla)
 
         for paragraph in documento.paragraphs:
             for run in paragraph.runs:
@@ -36,6 +37,7 @@ async def reemplazar_docx(ruta_documento, datos):
         ruta_salida = f"temp_{uuid.uuid4()}.docx"
         ruta_salida_tmp = os.path.join(ruta_actual,"tmp",ruta_salida)
         documento.save(ruta_salida_tmp)
+        print("se guardó documento correctamente")
         return {"Mensaje": "Documento generado con éxito"}
     except Exception as e:
         return JSONResponse(
