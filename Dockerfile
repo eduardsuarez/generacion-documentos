@@ -16,11 +16,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+#Usuario no root por seguridad
+RUN useradd -ms /bin/bash esuarez
+
 # Cambiar la propiedad de todos los archivos a 'esuarez'
 RUN chown -R esuarez:esuarez /generacion-documentos
 
-#Usuario no root por seguridad
-RUN useradd -ms /bin/bash esuarez
 
 RUN mkdir -p /generacion-documentos/tmp && \
     chmod -R 777 /generacion-documentos/tmp && \
