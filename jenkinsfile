@@ -52,8 +52,7 @@ pipeline {
 
                 // Desplegar el nuevo contenedor
                 sh '''
-                    sudo chmod -R 777 ${WORKSPACE}/tmp
-                    sudo chown -R esuarez:esuarez ${WORKSPACE}/tmp
+                    chmod -R 777 ${WORKSPACE}/tmp
                     docker run -d -p 4449:4449 \
                     -v ${WORKSPACE}/tmp:/generacion-documentos/tmp \
                     --user esuarez \
