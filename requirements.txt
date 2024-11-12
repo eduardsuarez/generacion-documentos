@@ -5,3 +5,5 @@ pypdf2
 docxtpl
 xlsxwriter
 python-dotenv
+fastapi
+uvicorn
