@@ -18,10 +18,13 @@ COPY . .
 
 #Usuario no root por seguridad
 RUN useradd -ms /bin/bash esuarez
-USER esuarez
+
 
 RUN mkdir -p /generacion-documentos/tmp && \
-    chmod -R 755 /generacion-documentos
+    chmod -R 755 /generacion-documentos \
+    chown -R esuarez:esuarez /generacion-documentos
+
+USER esuarez
 
 EXPOSE 4449
 CMD [ "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "4449"]
