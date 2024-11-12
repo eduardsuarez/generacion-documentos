@@ -1,13 +1,11 @@
 #Imagen base de Python
 FROM python:3.11-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libreoffice \
-    libreoffice-writer \
-    default-jre \
-    flake8 \
-    black \
-    mypy \
-    && rm -rf /var/lib/apt/lists/*
+    libcairo2-dev gcc  g++ \ 
+    libffi-dev libfreetype-dev libreoffice-writer \
+    "fonts-dejavu" fonts-freefont-ttf coreutils  curl \
+    libjpeg62-turbo-dev zlib1g-dev
+    
 
 WORKDIR /generacion-documentos
 
