@@ -43,6 +43,7 @@ pipeline {
                 // Desplegar el contenedor en local
                 sh '''
                     docker run -d \
+                    -v ${WORKSPACE}/tmp:/generacion-documentos/tmp \
                         ${DOCKER_IMAGE}:${DOCKER_TAG}
                 '''
             }
@@ -53,6 +54,7 @@ pipeline {
         always {
             // Limpiar workspace
             cleanWs()
+            sh 'docker rm -f $(docker ps -aq)'
         }
         success {
             echo 'Pipeline ejecutado exitosamente!'
