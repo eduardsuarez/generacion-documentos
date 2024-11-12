@@ -19,10 +19,9 @@ COPY . .
 #Usuario no root por seguridad
 RUN useradd -ms /bin/bash esuarez
 
-USER root
-RUN mkdir -p /generacion-documentos/tmp && \
-    chmod -R 755 /generacion-documentos/tmp && \
-    chown -R esuarez:esuarez /generacion-documentos/tmp 
+# RUN mkdir -p /generacion-documentos/tmp && \
+#     chmod -R 755 /generacion-documentos && \
+#     chown -R esuarez:esuarez /generacion-documentos
 
 USER esuarez
 
